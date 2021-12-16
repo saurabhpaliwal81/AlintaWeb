@@ -17,16 +17,24 @@ namespace WebApi.Controllers
             return await Mediator.Send(command);
         }
 
-        [HttpPut]
-        public async Task<ActionResult<int>> Update(UpdateCustomerCommand command)
+        [HttpPut("{id}")]
+        public async Task<ActionResult<int>> Update(int id, UpdateCustomerCommand command)
         {
-            return await Mediator.Send(command);
+            if (id != command.Id)
+            {
+                return BadRequest();
+            }
+
+            await Mediator.Send(command);
+
+            return NoContent();
         }
 
-        [HttpDelete]
-        public async Task<ActionResult<bool>> Delete(DeleteCustomerCommand command)
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<bool>> Delete(int id)
         {
-            return await Mediator.Send(command);
+            await Mediator.Send(new DeleteCustomerCommand() { Id = id });
+            return NoContent();
         }
 
         [HttpGet]
