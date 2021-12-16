@@ -8,4 +8,3 @@ STEPS TO FOLLOW :
 	- PUT : Update an existing customer
 	- DELETE : remove an existing customer.
 	- Get : search customer by name.
-
